@@ -42,6 +42,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 var app = builder.Build();
 
@@ -55,6 +57,7 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<SchoolSystem.Middlewares.CustomExceptionHandlingMiddleware>();
 app.UseMiddleware<RoleMiddleware>();
+app.UseMiddleware<ApiLoggingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

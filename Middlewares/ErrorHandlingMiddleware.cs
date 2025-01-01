@@ -32,8 +32,9 @@ namespace SchoolSystem.Middlewares
                 {
                     case CustomException customException:
                         _logger.LogError(
-                            "[Expected Error] Message: {Message}, Title: {Title}, StatusCode: {StatusCode}, " +
+                            "TraceId: {TraceId} | [Expected Error] Message: {Message}, Title: {Title}, StatusCode: {StatusCode}, " +
                             "Thrown by {CallerMemberName} in {CallerFilePath}:line {CallerLineNumber}",
+                            context.TraceIdentifier,
                             customException.Message,
                             customException.Title,
                             customException.StatusCode,
@@ -45,7 +46,7 @@ namespace SchoolSystem.Middlewares
                         break;
 
                     default:
-                        _logger.LogError(exception, "[Unhandled Exception] Internal Server Error");
+                        _logger.LogError(exception, "TraceId: {TraceId} | [Unhandled Exception]  Internal Server Error", context.TraceIdentifier);
                         await HandleExceptionAsync(context, exception);
                         break;
                 }
@@ -77,13 +78,13 @@ namespace SchoolSystem.Middlewares
                 detail: exception.Message
             );
 
+            problemDetails.Extensions["traceId"] = httpContext.TraceIdentifier;
+
             httpContext.Response.StatusCode = statusCode;
             httpContext.Response.ContentType = "application/json";
 
             var json = JsonSerializer.Serialize(problemDetails);
             await httpContext.Response.WriteAsync(json);
         }
-
-
     }
 }
