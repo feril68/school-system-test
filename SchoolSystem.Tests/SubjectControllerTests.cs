@@ -24,8 +24,8 @@ namespace SchoolSystem.Tests
             // Arrange
             var Subjects = new List<Subject>
             {
-                new Subject { Id = 1, Name = "Math" },
-                new Subject { Id = 2, Name = "Science" }
+                new Subject { Id = 1, Name = "Math", Credit=1 },
+                new Subject { Id = 2, Name = "Science", Credit=1 }
             };
 
             _mockSubjectService.Setup(s => s.GetAllSubjectsAsync()).ReturnsAsync(Subjects);
@@ -43,7 +43,7 @@ namespace SchoolSystem.Tests
         public async Task GetSubject_ReturnsOkResult_WithSubject()
         {
             // Arrange
-            var Subject = new Subject { Id = 1, Name = "Math" };
+            var Subject = new Subject { Id = 1, Name = "Math", Credit = 1 };
             _mockSubjectService.Setup(s => s.GetSubjectByIdAsync(1)).ReturnsAsync(Subject);
 
             // Act
@@ -59,8 +59,8 @@ namespace SchoolSystem.Tests
         public async Task CreateSubject_ReturnsCreatedAtActionResult_WithCreatedSubject()
         {
             // Arrange
-            var SubjectDto = new SubjectCreateDto { Name = "Math" };
-            var createdSubject = new Subject { Id = 1, Name = "Math" };
+            var SubjectDto = new SubjectCreateDto { Name = "Math", Credit = 1 };
+            var createdSubject = new Subject { Id = 1, Name = "Math", Credit = 1 };
 
             _mockSubjectService.Setup(s => s.CreateSubjectAsync(SubjectDto)).ReturnsAsync(createdSubject);
 
@@ -78,7 +78,7 @@ namespace SchoolSystem.Tests
         public async Task UpdateSubject_ReturnsNoContent()
         {
             // Arrange
-            var SubjectDto = new SubjectUpdateDto { Name = "Math Discrete" };
+            var SubjectDto = new SubjectUpdateDto { Name = "Math Discrete", Credit = 1 };
 
             _mockSubjectService.Setup(s => s.UpdateSubjectAsync(1, SubjectDto)).Returns(Task.CompletedTask);
 

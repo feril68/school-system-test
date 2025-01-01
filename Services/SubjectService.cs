@@ -31,7 +31,8 @@ namespace SchoolSystem.Services
         {
             Subject newSubject = new Subject
             {
-                Name = subjectCreateDto.Name
+                Name = subjectCreateDto.Name,
+                Credit = subjectCreateDto.Credit
             };
             _context.Subjects.Add(newSubject);
             await _context.SaveChangesAsync();
@@ -44,6 +45,7 @@ namespace SchoolSystem.Services
             var existingSubject = await this.GetSubjectByIdAsync(id);
             if (existingSubject == null) throw new NotFoundException($"Subject with ID {id} does not exist");
             existingSubject.Name = subjectUpdateDto.Name;
+            existingSubject.Credit = subjectUpdateDto.Credit;
             await _context.SaveChangesAsync();
         }
 

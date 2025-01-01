@@ -25,7 +25,7 @@ namespace SchoolSystem.Tests
             // Arrange
             var studentId = 1;
             var classId = 1;
-            var student = new Student { Id = studentId, Name = "John Doe" };
+            var student = new Student { Id = studentId, Name = "John Doe", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
             var classObj = new Class { Id = classId, Name = "class one" };
 
             var enrollments = new List<Enrollment>
@@ -48,7 +48,7 @@ namespace SchoolSystem.Tests
         {
             // Arrange
             var enrollmentDto = new EnrollmentCreateDto { ClassId = 1, StudentId = 1, EnrollmentDate = System.DateTime.UtcNow };
-            var student = new Student { Id = enrollmentDto.StudentId, Name = "John Doe" };
+            var student = new Student { Id = enrollmentDto.StudentId, Name = "John Doe", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
             var classObj = new Class { Id = enrollmentDto.ClassId, Name = "class one" };
             var createdEnrollment = new Enrollment
             {

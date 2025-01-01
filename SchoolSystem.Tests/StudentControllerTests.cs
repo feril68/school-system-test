@@ -24,8 +24,8 @@ namespace SchoolSystem.Tests
             // Arrange
             var students = new List<Student>
             {
-                new Student { Id = 1, Name = "John Doe" },
-                new Student { Id = 2, Name = "Jane Doe" }
+                new Student { Id = 1, Name = "John Doe", Email="john.doe@gmail.com", PhoneNumber="+6281234123123" },
+                new Student { Id = 2, Name = "Jane Doe", Email="jane.doe@gmail.com", PhoneNumber="+6281234123122" }
             };
 
             _mockStudentService.Setup(s => s.GetAllStudentsAsync()).ReturnsAsync(students);
@@ -43,7 +43,7 @@ namespace SchoolSystem.Tests
         public async Task GetStudent_ReturnsOkResult_WithStudent()
         {
             // Arrange
-            var student = new Student { Id = 1, Name = "John Doe" };
+            var student = new Student { Id = 1, Name = "John Doe", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
             _mockStudentService.Setup(s => s.GetStudentByIdAsync(1)).ReturnsAsync(student);
 
             // Act
@@ -59,8 +59,8 @@ namespace SchoolSystem.Tests
         public async Task CreateStudent_ReturnsCreatedAtActionResult_WithCreatedStudent()
         {
             // Arrange
-            var studentDto = new StudentCreateDto { Name = "John Doe" };
-            var createdStudent = new Student { Id = 1, Name = "John Doe" };
+            var studentDto = new StudentCreateDto { Name = "John Doe", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
+            var createdStudent = new Student { Id = 1, Name = "John Doe", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
 
             _mockStudentService.Setup(s => s.CreateStudentAsync(studentDto)).ReturnsAsync(createdStudent);
 
@@ -78,7 +78,7 @@ namespace SchoolSystem.Tests
         public async Task UpdateStudent_ReturnsNoContent()
         {
             // Arrange
-            var studentDto = new StudentUpdateDto { Name = "Updated Name" };
+            var studentDto = new StudentUpdateDto { Name = "Updated Name", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
 
             _mockStudentService.Setup(s => s.UpdateStudentAsync(1, studentDto)).Returns(Task.CompletedTask);
 

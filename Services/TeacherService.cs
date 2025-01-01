@@ -31,7 +31,9 @@ namespace SchoolSystem.Services
         {
             Teacher newTeacher = new Teacher
             {
-                Name = teacherCreateDto.Name
+                Name = teacherCreateDto.Name,
+                Email = teacherCreateDto.Email,
+                PhoneNumber = teacherCreateDto.PhoneNumber
             };
             _context.Teachers.Add(newTeacher);
             await _context.SaveChangesAsync();
@@ -44,6 +46,8 @@ namespace SchoolSystem.Services
             var existingTeacher = await this.GetTeacherByIdAsync(id);
             if (existingTeacher == null) throw new NotFoundException($"Teacher with ID {id} does not exist");
             existingTeacher.Name = teacherUpdateDto.Name;
+            existingTeacher.Email = teacherUpdateDto.Email;
+            existingTeacher.PhoneNumber = teacherUpdateDto.PhoneNumber;
             await _context.SaveChangesAsync();
 
         }

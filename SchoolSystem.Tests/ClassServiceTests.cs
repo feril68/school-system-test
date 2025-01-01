@@ -24,8 +24,8 @@ namespace SchoolSystem.Tests
             _service = new ClassService(_context);
 
             // Seed data
-            var subject = new Subject { Id = 1, Name = "Math" };
-            var teacher = new Teacher { Id = 1, Name = "Mr. Smith" };
+            var subject = new Subject { Id = 1, Name = "Math", Credit = 1 };
+            var teacher = new Teacher { Id = 1, Name = "Mr. Smith", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
 
             _context.Subjects.Add(subject);
             _context.Teachers.Add(teacher);

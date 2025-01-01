@@ -25,8 +25,8 @@ namespace SchoolSystem.Tests
 
             // Seed data
             _context.Teachers.AddRange(
-                new Teacher { Id = 1, Name = "John Doe" },
-                new Teacher { Id = 2, Name = "Jane Doe" }
+                new Teacher { Id = 1, Name = "John Doe", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" },
+                new Teacher { Id = 2, Name = "Jane Doe", Email = "jane.doe@gmail.com", PhoneNumber = "+6281234123123" }
             );
             _context.SaveChanges();
         }
@@ -64,7 +64,7 @@ namespace SchoolSystem.Tests
         public async Task CreateTeacherAsync_AddsTeacherToDatabase()
         {
             // Arrange
-            var newTeacherDto = new TeacherCreateDto { Name = "New Teacher" };
+            var newTeacherDto = new TeacherCreateDto { Name = "New Teacher", Email = "new.teacher@gmail.com", PhoneNumber = "+6281234123121" };
 
             // Act
             var result = await _service.CreateTeacherAsync(newTeacherDto);
@@ -79,7 +79,7 @@ namespace SchoolSystem.Tests
         public async Task UpdateTeacherAsync_UpdatesExistingTeacher()
         {
             // Arrange
-            var updateDto = new TeacherUpdateDto { Name = "Updated Name" };
+            var updateDto = new TeacherUpdateDto { Name = "Updated Name", Email = "update.teacher@gmail.com", PhoneNumber = "+6281234123129" };
 
             // Act
             await _service.UpdateTeacherAsync(1, updateDto);
@@ -93,7 +93,7 @@ namespace SchoolSystem.Tests
         public async Task UpdateTeacherAsync_ThrowsNotFoundException_WhenTeacherDoesNotExist()
         {
             // Arrange
-            var updateDto = new TeacherUpdateDto { Name = "Nonexistent" };
+            var updateDto = new TeacherUpdateDto { Name = "Nonexistent", Email = "john.doe@gmail.com", PhoneNumber = "+6281234123123" };
 
             // Act & Assert
             await Assert.ThrowsAsync<NotFoundException>(async () =>

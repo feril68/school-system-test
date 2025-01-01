@@ -25,8 +25,8 @@ namespace SchoolSystem.Tests
 
             // Seed data
             _context.Subjects.AddRange(
-                new Subject { Id = 1, Name = "John Doe" },
-                new Subject { Id = 2, Name = "Jane Doe" }
+                new Subject { Id = 1, Name = "Math", Credit = 1 },
+                new Subject { Id = 2, Name = "Science", Credit = 1 }
             );
             _context.SaveChanges();
         }
@@ -49,7 +49,7 @@ namespace SchoolSystem.Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal("John Doe", result.Name);
+            Assert.Equal("Math", result.Name);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace SchoolSystem.Tests
         public async Task CreateSubjectAsync_AddsSubjectToDatabase()
         {
             // Arrange
-            var newSubjectDto = new SubjectCreateDto { Name = "New Subject" };
+            var newSubjectDto = new SubjectCreateDto { Name = "New Subject", Credit = 1 };
 
             // Act
             var result = await _service.CreateSubjectAsync(newSubjectDto);
@@ -79,7 +79,7 @@ namespace SchoolSystem.Tests
         public async Task UpdateSubjectAsync_UpdatesExistingSubject()
         {
             // Arrange
-            var updateDto = new SubjectUpdateDto { Name = "Updated Name" };
+            var updateDto = new SubjectUpdateDto { Name = "Updated Name", Credit = 1 };
 
             // Act
             await _service.UpdateSubjectAsync(1, updateDto);
@@ -93,7 +93,7 @@ namespace SchoolSystem.Tests
         public async Task UpdateSubjectAsync_ThrowsNotFoundException_WhenSubjectDoesNotExist()
         {
             // Arrange
-            var updateDto = new SubjectUpdateDto { Name = "Nonexistent" };
+            var updateDto = new SubjectUpdateDto { Name = "Nonexistent", Credit = 1 };
 
             // Act & Assert
             await Assert.ThrowsAsync<NotFoundException>(async () =>
