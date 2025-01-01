@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace SchoolSystem.Controllers
             _classService = classService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Class>>> GetClasses()
         {
@@ -25,6 +27,7 @@ namespace SchoolSystem.Controllers
         }
 
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Class>> GetClass(int id)
         {
@@ -32,6 +35,7 @@ namespace SchoolSystem.Controllers
             return Ok(classObj);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Class>> CreateClass(ClassCreateDto classCreateDto)
         {
@@ -39,6 +43,7 @@ namespace SchoolSystem.Controllers
             return CreatedAtAction(nameof(GetClass), new { id = createdClass.Id }, createdClass);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateClass(int id, ClassUpdateDto classUpdateDto)
         {
@@ -46,6 +51,7 @@ namespace SchoolSystem.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClass(int id)
         {
