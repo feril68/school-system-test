@@ -6,6 +6,8 @@ using SchoolSystem.Data;
 using SchoolSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+DotNetEnv.Env.Load();
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
