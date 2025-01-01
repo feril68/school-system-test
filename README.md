@@ -16,6 +16,7 @@ This Project used for technical test in PT. Neural Technologies Indonesia
   - [Testing](#testing)
 
 ---
+
 ## Assumptions
 
 1. The database schema is modeled as follows (Entity-Relationship Diagram):
@@ -42,17 +43,20 @@ Ensure you have the following installed:
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/feril68/school-system-test
    cd school-system-test
    ```
 
 2. Restore the required NuGet packages:
+
    ```bash
    dotnet restore
    ```
 
 3. Build the project:
+
    ```bash
    dotnet build
    ```
@@ -65,7 +69,8 @@ Ensure you have the following installed:
    Create a `.env` file in the root of the project. Populate it with necessary environment variables, such as database connection strings and JWT settings.
 
    Example `.env` file:
-   ```
+
+   ```env
    ConnectionStrings__DefaultConnection=Host=localhost;Database=school_system;Username=postgres;Password=test123
    Jwt__Key=83CF2BE5E22EE899463158DDA559FDw2
    Jwt__Issuer=SchoolSystem
@@ -76,6 +81,7 @@ Ensure you have the following installed:
 
 2. **Database Migration**  
    Apply Entity Framework migrations to set up the database schema:
+
    ```bash
    dotnet ef database update
    ```
@@ -85,6 +91,7 @@ Ensure you have the following installed:
 ## Running the Application
 
 1. Start the application in development mode:
+
    ```bash
    dotnet run
    ```
@@ -95,11 +102,14 @@ Ensure you have the following installed:
    Navigate to `http://localhost:5089/swagger` in your browser.
 
 3. Important: please post to `http://localhost:5089/api/auth/init` for init admin user or you can run this:
+
    ```bash
    curl --location --request POST 'http://localhost:5089/api/auth/init'
    ```
+
    after that you can login as admin. Login Admin:
-   ```
+
+   ```env
    username = admin
    password = admin
    ```
@@ -111,9 +121,9 @@ Ensure you have the following installed:
 This project uses `xUnit` and `Moq` for testing. To run the tests:
 
 1. Execute the following command:
+
    ```bash
    dotnet test
    ```
 
 2. Ensure all tests pass before deploying or making further changes.
-
