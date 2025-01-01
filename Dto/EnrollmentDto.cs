@@ -4,13 +4,13 @@ namespace SchoolSystem.Dto
 {
     public class EnrollmentCreateDto
     {
-        [Required]
+        [Required(ErrorMessage = "Student ID is required")]
         public int StudentId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Class ID is required")]
         public int ClassId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Enrollment Date is required")]
         public DateTime EnrollmentDate { get; set; }
 
     }
