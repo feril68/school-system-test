@@ -94,6 +94,16 @@ Ensure you have the following installed:
 2. Access the Swagger UI for API documentation:
    Navigate to `http://localhost:5089/swagger` in your browser.
 
+3. Important: please post to `http://localhost:5089/api/auth/init` for init admin user or you can run this:
+   ```bash
+   curl --location --request POST 'http://localhost:5089/api/auth/init'
+   ```
+   after that you can login as admin. Login Admin:
+   ```
+   username = admin
+   password = admin
+   ```
+
 ---
 
 ## Testing

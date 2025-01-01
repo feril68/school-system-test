@@ -10,5 +10,6 @@ namespace SchoolSystem.Services
         User GetUser(string username);
 
         Task<User> CreateUser(UserDto userDto);
+        Task<User> InitAdmin();
     }
 }

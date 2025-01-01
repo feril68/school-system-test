@@ -38,5 +38,12 @@ namespace SchoolSystem.Controllers
             var newUser = await _authService.CreateUser(userDto);
             return newUser;
         }
+
+        [HttpPost("init")]
+        public async Task<ActionResult<User>> InitRegister()
+        {
+            var newUser = await _authService.InitAdmin();
+            return newUser;
+        }
     }
 }

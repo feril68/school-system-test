@@ -84,5 +84,23 @@ namespace SchoolSystem.Services
             await _context.SaveChangesAsync();
             return newUser;
         }
+
+        public async Task<User> InitAdmin()
+        {
+            var existUser = _context.Users.Any(u => u.Username == "admin");
+            if (existUser)
+            {
+                throw new BadRequestException("Already init auth");
+            }
+            User newUser = new User
+            {
+                Username = "admin",
+                Password = this.HashPassword("admin"),
+                Role = "Admin"
+            };
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+            return newUser;
+        }
     }
 }
